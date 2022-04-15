@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
-from api.credit_scorer_object import credit_scorer
+from credit_scorer_object import credit_scorer
 from pydantic import BaseModel
 import pandas as pd
 
@@ -13,13 +13,13 @@ app = FastAPI(
 
 #creating the classifier
 
-scorer = credit_scorer('api/pipeline', 'api/classifier')
+scorer = credit_scorer('ressource/pipeline', 'ressource/classifier')
 
 #Model
 class Customer(BaseModel):
     id: int
 
-df = pd.read_csv('dataset_sample.csv',
+df = pd.read_csv('data/dataset_sample.csv',
                             engine='pyarrow',
                             verbose=False,
                             encoding='ISO-8859-1',
