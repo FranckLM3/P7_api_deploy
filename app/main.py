@@ -33,7 +33,12 @@ app.add_middleware(
 
 # Initialize the scorer
 try:
-    scorer = CreditScorer('ressource/pipeline', 'ressource/classifier')
+    # Use absolute paths relative to project root
+    base_dir = Path(__file__).parent.parent
+    pipeline_path = str(base_dir / 'ressource' / 'pipeline')
+    classifier_path = str(base_dir / 'ressource' / 'classifier')
+    
+    scorer = CreditScorer(pipeline_path, classifier_path)
     logger.info("Credit scorer initialized successfully")
 except Exception as e:
     logger.error(f"Failed to initialize credit scorer: {str(e)}")
@@ -41,16 +46,19 @@ except Exception as e:
 
 # Load the dataset
 try:
-    data_path = Path('data/dataset_sample.csv')
+    # Use absolute path relative to the project root
+    base_dir = Path(__file__).parent.parent
+    data_path = base_dir / 'data' / 'dataset_sample.csv'
+    
     if not data_path.exists():
-        raise FileNotFoundError("Dataset file not found")
+        raise FileNotFoundError(f"Dataset file not found at {data_path}")
         
     df = pd.read_csv(
         data_path,
         engine='pyarrow',
         encoding='ISO-8859-1'
     )
-    logger.info("Dataset loaded successfully")
+    logger.info(f"Dataset loaded successfully from {data_path}")
 except Exception as e:
     logger.error(f"Failed to load dataset: {str(e)}")
     raise
