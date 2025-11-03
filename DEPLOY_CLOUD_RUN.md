@@ -9,7 +9,7 @@ Ce guide décrit comment builder et déployer cette API FastAPI sur Google Cloud
 
 ## 1. Activer les APIs nécessaires
 ```bash
-PROJECT_ID=openclassrooms-477011
+PROJECT_ID=your-project-id
 gcloud config set project $PROJECT_ID
 
 gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com
