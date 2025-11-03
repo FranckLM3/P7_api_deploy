@@ -35,11 +35,10 @@ app.add_middleware(
 try:
     # Use absolute paths relative to project root
     base_dir = Path(__file__).parent.parent
-    pipeline_path = str(base_dir / 'ressource' / 'pipeline')
-    classifier_path = str(base_dir / 'ressource' / 'classifier')
+    pipeline_path = str(base_dir / 'ressource' / 'pipeline.joblib')
     
-    scorer = CreditScorer(pipeline_path, classifier_path)
-    logger.info("Credit scorer initialized successfully")
+    scorer = CreditScorer(pipeline_path)
+    logger.info("Credit scorer initialized successfully with unified pipeline")
 except Exception as e:
     logger.error(f"Failed to initialize credit scorer: {str(e)}")
     raise
